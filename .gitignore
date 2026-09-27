@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+outputs/
+*.tmp
+.single_manifest.json
+colab-state/
