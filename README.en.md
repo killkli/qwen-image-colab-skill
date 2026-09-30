@@ -1,6 +1,6 @@
 # Qwen-Image-2.1 Colab Skill
 
-A standalone Codex and Antigravity skill repository for generating and editing images via Google Colab GPU using Alibaba's **Qwen-Image-2.1 (7B DiT)** model.
+A standalone Codex and Antigravity skill repository for generating and editing images via Google Colab GPU using Alibaba's **Qwen-Image-2.1** model.
 
 - [繁體中文文件](README.zh-TW.md)
 
@@ -8,11 +8,12 @@ A standalone Codex and Antigravity skill repository for generating and editing i
 
 - **Unified Generation & Editing**: Supports text-to-image (T2I) and image-to-image editing (1–10 reference images) within a single pipeline.
 - **Native RGBA Transparency**: Generates transparent PNG assets directly without external background-removal tools.
-- **Colab GPU support**: Uses an L4 or A100 Colab GPU; runtime depends on the selected GPU, image size, and inference steps.
+- **Colab GPU support**: Uses an L4 (with bundled CPU offload) or A100 Colab GPU; runtime depends on the selected GPU, image size, and inference steps.
 - **Batch Session Management**: Reuses a single live Colab session across multiple jobs to avoid redundant downloads, and terminates cleanly upon completion or error.
 - `SKILL.md` — agent instructions.
 - `scripts/runner.py` — Colab session and generation runner.
-- `assets/Qwen_Image_2_1_Colab.ipynb` — remote inference notebook.
+- `assets/Qwen_Image_2_1_Colab.ipynb` — remote inference notebook (with L4 CPU-offload patch applied).
+- `references/l4-memory-20260930.md` — validated L4 22 GB VRAM memory notes.
 - `install.sh` — installer that preserves an existing skill unless `--force` is used.
 - `tests/test_runner.py` — offline tests using a mock Colab CLI.
 

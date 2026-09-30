@@ -2,12 +2,13 @@
 
 **English:** [README.en.md](README.en.md)
 
-這是一個完整、可獨立使用的 Codex / Antigravity 技能儲存庫，能將文字 Prompt 與本機參照圖片交給 Google Colab GPU，使用阿里巴巴 **Qwen-Image-2.1（7B DiT）** 進行文生圖（T2I）與影像編輯（Image Editing）。
+這是一個完整、可獨立使用的 Codex / Antigravity 技能儲存庫，能將文字 Prompt 與本機參照圖片交給 Google Colab GPU，使用阿里巴巴 **Qwen-Image-2.1** 進行文生圖（T2I）與影像編輯（Image Editing）。
 
 儲存庫包含：
 - `SKILL.md`：Codex / Antigravity 選用此技能時讀取的自動化指示；
 - `scripts/runner.py`：管理 Colab session、查詢點數餘額、批次上傳、執行推論與安全關機清理的 Python runner；
-- `assets/Qwen_Image_2_1_Colab.ipynb`：在遠端 Colab GPU 執行的推論 Notebook；
+- `assets/Qwen_Image_2_1_Colab.ipynb`：在遠端 Colab GPU 執行的推論 Notebook（已套用 L4 22GB CPU offload 修正）；
+- `references/l4-memory-20260930.md`：L4 GPU VRAM 限制驗證紀錄；
 - `run_qwen_image.sh`：單張圖片推論的便利 Shell 啟動器；
 - `install.sh`：可攜、可重複執行且預設不覆蓋舊檔的安裝程式；
 - `tests/test_runner.py`：使用 Mock Colab CLI 執行、不耗費任何雲端點數的單元測試。
@@ -22,7 +23,7 @@
 2. **原生透明通道（RGBA）**：
    * 可原生輸出帶 Alpha 通道的透明背景圖片，無需額外執行摳圖或去背演算法。
 3. **支援 Colab GPU（L4 / A100）**：
-   * 可使用 Colab L4 GPU（24GB VRAM）或 A100；實際耗時依 GPU、圖片尺寸與推論步數而異。
+   * 可使用 Colab L4 GPU（22GB VRAM，內建 CPU offload）或 A100；實際耗時依 GPU、圖片尺寸與推論步數而異。L4 VRAM 限制與驗證紀錄見 `references/l4-memory-20260930.md`。
 4. **自動生命週期管理**：
    * 批次任務自動重用同一個 Colab Session，避免重複下載模型。
    * 執行完畢或中途例外自動安全關閉 Session，避免點數外洩。
