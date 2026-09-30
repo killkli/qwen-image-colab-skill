@@ -88,6 +88,9 @@ trap cleanup EXIT
 cp -R "$REPO_DIR/SKILL.md" "$STAGING/SKILL.md"
 cp -R "$REPO_DIR/scripts" "$STAGING/scripts"
 cp -R "$REPO_DIR/assets" "$STAGING/assets"
+if [[ -d "$REPO_DIR/references" ]]; then
+  cp -R "$REPO_DIR/references" "$STAGING/references"
+fi
 find "$STAGING" -type d -name __pycache__ -prune -exec rm -rf {} +
 chmod +x "$STAGING/scripts/runner.py"
 
